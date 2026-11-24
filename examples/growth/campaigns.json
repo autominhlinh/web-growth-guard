@@ -1,0 +1,20 @@
+[
+  {
+    "destination": "https://example.invalid/en/",
+    "tags": {
+      "source": "newsletter",
+      "medium": "email",
+      "campaign": "sample_launch",
+      "content": "en"
+    }
+  },
+  {
+    "destination": "https://example.invalid/vi/",
+    "tags": {
+      "source": "newsletter",
+      "medium": "email",
+      "campaign": "sample_launch",
+      "content": "vi"
+    }
+  }
+]

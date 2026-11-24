@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "web-growth-guard"
+version = "0.6.0rc1"
+description = "Evidence-based SEO and public discovery regression checks for website maintainers"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+dependencies = []
+
+[project.scripts]
+web-growth-guard = "web_growth_guard.cli:main"
+web-growth-guard-mcp = "web_growth_guard.mcp_server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

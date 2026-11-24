@@ -1,0 +1,56 @@
+{
+  "site": {
+    "origin": "https://example.invalid",
+    "pages": [
+      {
+        "url": "https://example.invalid/en/",
+        "file": "pages/en.html",
+        "indexable": true,
+        "canonical": "https://example.invalid/en/",
+        "language": "en",
+        "alternates": {
+          "en": "https://example.invalid/en/",
+          "vi": "https://example.invalid/vi/"
+        }
+      },
+      {
+        "url": "https://example.invalid/vi/",
+        "file": "pages/vi.html",
+        "indexable": true,
+        "canonical": "https://example.invalid/vi/",
+        "language": "vi",
+        "alternates": {
+          "en": "https://example.invalid/en/",
+          "vi": "https://example.invalid/vi/"
+        }
+      }
+    ],
+    "sitemap": "sitemap.xml"
+  },
+  "landings": [
+    {
+      "url": "https://example.invalid/en/",
+      "cta_targets": [
+        "https://example.invalid/en/join/"
+      ],
+      "require_social": true
+    },
+    {
+      "url": "https://example.invalid/vi/",
+      "cta_targets": [
+        "https://example.invalid/vi/join/"
+      ],
+      "require_social": true
+    }
+  ],
+  "clusters": [
+    {
+      "id": "directory",
+      "members": {
+        "en": "https://example.invalid/en/",
+        "vi": "https://example.invalid/vi/"
+      },
+      "x_default": null
+    }
+  ]
+}

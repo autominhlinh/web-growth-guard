@@ -1,0 +1,26 @@
+{
+  "origin": "https://example.invalid",
+  "pages": [
+    {
+      "url": "https://example.invalid/en/",
+      "indexable": true,
+      "canonical": "https://example.invalid/en/",
+      "language": "en",
+      "alternates": {
+        "en": "https://example.invalid/en/",
+        "vi": "https://example.invalid/vi/"
+      }
+    },
+    {
+      "url": "https://example.invalid/vi/",
+      "indexable": true,
+      "canonical": "https://example.invalid/vi/",
+      "language": "vi",
+      "alternates": {
+        "en": "https://example.invalid/en/",
+        "vi": "https://example.invalid/vi/"
+      }
+    }
+  ],
+  "sitemap": "https://example.invalid/sitemap.xml"
+}

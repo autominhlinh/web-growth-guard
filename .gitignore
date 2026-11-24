@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+build/
+dist/
+reports/
+.env
+.env.*
+
+# Private operator exports and reports (keep outside the source tree)
+*.csv
+!examples/analytics/*.csv
+reports-*/
+analytics-dashboard.html

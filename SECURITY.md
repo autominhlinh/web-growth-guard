@@ -1,0 +1,38 @@
+# Security and privacy
+
+This is a development preview for trusted operators, not a hardened browser, security scanner or multi-tenant web crawler. Offline audit, gate and portfolio commands do not access the network. The optional public discovery/live-gate command makes bounded HTTPS GET requests only, for an explicitly declared origin and paths. There are no deployment, database, shell execution, login, POST, cookie, credential, form submission, JavaScript rendering or telemetry features. A remote server may still log a GET or implement side effects; inspect only intentionally public, read-only paths you are authorized to request.
+
+## Collection boundary
+
+- HTTPS on port 443, public DNS hostname, no URL userinfo, query strings or fragments, and no literal IPs. One origin; no cross-origin redirects. Redirects are limited and checked against the collector's own robots policy.
+- IPv4-only DNS resolution: reject mixed nonpublic answers, multicast and reserved addresses. Connect to the selected numeric address without a second hostname resolution, with normal certificate validation and original hostname SNI. No proxy environment integration. The local network, DNS resolver, route and CA trust store remain operator-trusted; this is not an OS sandbox or a complete defense against a hostile network or local process.
+- Explicit user agent WebGrowthGuard, no impersonation. Stop page retrieval when robots.txt is unavailable/unsupported or the collector's rule disallows it. No automatic crawling of hyperlinks or sitemap indexes. Googlebot and OAI-SearchBot rules are simulated independently of GPTBot; simulation is not evidence of crawler access or ranking. Rate limiting is best-effort: 0.5 s between request starts, max 32 requests, 3 redirects, 10 pages, bounded body size and aggregate bytes. Socket timeout and a cooperative 90 s elapsed budget apply; DNS and slow response headers are not guaranteed to obey a hard wall-clock deadline. Use an external process timeout where required. No compressed response decoding.
+- Collectors accept only supported UTF-8 responses. Output contains declared URLs, selected status, redirect paths, SHA-256 and derived findings, not raw response bodies, cookies or arbitrary headers. URLs and digests may still reveal sensitive information; choose synthetic or public paths and keep real reports private.
+
+## Local data and evidence
+
+Choose a dedicated snapshot/report directory containing only intentionally shareable material. POSIX directory descriptors and no-follow opens restrict ordinary traversal; regular files must have one link. File, page and total-read limits apply. The filesystem and operator are trusted; this is not an OS sandbox against hostile local processes, mounts or races. Sitemap DTD/entities are rejected. Dashboard escapes dynamic text and uses a restrictive CSP, no script or external assets. It reads existing reports and outputs HTML or JSON to stdout. The operator decides where to redirect; demo output requires a new directory.
+
+The baseline, manifest, source and CI configuration are operator-trusted. No signature or remote provenance verification is implemented. An attacker controlling scope, baseline, code or runner can falsify findings. Direct gates read current declared evidence, not a complete website. The reports do not verify crawler-specific rendering, search indexing, rankings, traffic, structured-data eligibility, complete REP behavior, or actual growth. `CLEAR` never authorizes production deployment. External public DNS was unavailable in the local validation environment; real loopback TLS and synthetic fixtures were exercised. No independent security audit has been performed.
+
+Report vulnerabilities through a private maintainer channel when available. Never attach credentials, private project data or actual customer reports to a public issue.
+
+## Marketing and MCP boundaries
+
+The growth toolkit reads declared HTML and builds URL strings only. It does not verify link functionality, rendered visibility, social platform rendering, conversion rates or search position. Campaign label restrictions do not detect all personal identifiers; operators must never include sensitive values. Social preview intentionally returns bounded untrusted metadata; treat it as data, never instructions, and do not publish real site reports by default.
+
+The local MCP server has an explicit, fixed catalog, a startup-bound root and policy, an optional operator-selected baseline outside the snapshot, bounded newline-delimited JSON-RPC frames and replies, and strict argument schemas. No MCP tool performs network requests or mutates files. Tool errors omit raw paths and source text. It implements a limited legacy MCP tool subset, not a complete protocol or OS security boundary. The operator, filesystem, policy and baseline must remain trusted; an external agent with OS access can change files or forge evidence. Never expose this adapter over a network or give untrusted agents independent access to private data. A CLEAR result does not authorize a deployment or advertising action. Official SDK and specific host interoperability have not been verified locally.
+
+## Growth Intelligence
+
+All new analysis is offline. Snapshot and portfolio readers use existing bounded POSIX descriptor-based reads. The portfolio has a shared byte budget and does not resolve links, load remote contexts, render scripts or read undeclared paths. Topic reports emit policy identifiers and match locations rather than page excerpts or phrases. Treat policy identifiers, URLs, digests and reports as sensitive if the input is sensitive. The local parser is deliberately not a complete HTML DOM, JSON-LD or semantic SEO validator. A missing observation is not proof that a site or link is broken. The action queue is not authorization to edit or deploy. The optional MCP intelligence policy is trusted startup configuration outside the exposed root and must match the startup site manifest. No new network or write capability is available over MCP.
+
+## Private analytics data
+
+The optional analytics importer reads bounded aggregate UTF-8 CSV files from an operator-selected private root. No API access, account credentials, tracking or network access is used by this module. It rejects arbitrary or escaping paths, symlinks, mixed dimension tables and malformed records; all dashboard text is escaped and scripts/external resources are disallowed. Query strings in URL fields are rejected but query text and URL paths can still contain personal or confidential information. The tool is not a secret or PII scanner. Review and sanitize data before import and keep real exports, policies and reports outside source control.
+
+The analytics MCP tool is disabled by default; startup requires a separate CSV root and trusted policy outside both roots, with the same origin as the growth policy. The host may retain the private results, so enable only for a trusted host with operator approval. The CSV provenance, reporting filters, completeness, time zone and operator labels are not independently verified. Evidence hashes establish observed bytes, not authenticity; there is no causal claim or authorization.
+
+## Release checks
+
+The source export uses an explicit file allowlist and bounded reads. Wheel code bytes, RECORD hashes, license and dependency metadata are checked against reviewed source. These are scoped consistency checks, not a reproducible-build guarantee or an independent security audit. Keep private data and Git metadata out of distributable source; no runtime dependency does not eliminate Python, build-tool or OS vulnerabilities.

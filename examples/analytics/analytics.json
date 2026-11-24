@@ -1,0 +1,33 @@
+{
+  "origin": "https://example.invalid",
+  "label": "Synthetic example",
+  "data_mode": "synthetic",
+  "periods": {
+    "previous": {
+      "start": "2026-09-01",
+      "end": "2026-09-28"
+    },
+    "current": {
+      "start": "2026-09-29",
+      "end": "2026-10-26"
+    }
+  },
+  "reports": {
+    "gsc_pages": {
+      "previous": "gsc_pages-previous.csv",
+      "current": "gsc_pages-current.csv",
+      "scope": "Synthetic, same property/filter/metric definitions per period"
+    },
+    "gsc_queries": {
+      "previous": "gsc_queries-previous.csv",
+      "current": "gsc_queries-current.csv",
+      "scope": "Synthetic, same property/filter/metric definitions per period"
+    },
+    "ga4_landings": {
+      "previous": "ga4_landings-previous.csv",
+      "current": "ga4_landings-current.csv",
+      "scope": "Synthetic, same property/filter/metric definitions per period"
+    }
+  },
+  "thresholds": {}
+}

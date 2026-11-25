@@ -45,6 +45,8 @@ def allowed_source(name):
         return True
     if any(x.startswith('.') for x in p.parts[1:]):
         return False
+    if name in {'.github/ISSUE_TEMPLATE/bug.yml', '.github/ISSUE_TEMPLATE/compatibility.yml', '.github/PULL_REQUEST_TEMPLATE.md'}:
+        return True
     if name.startswith('.github/workflows/'):
         return len(p.parts) == 3 and p.suffix in ('.yml', '.yaml')
     if name.startswith('examples/analytics/') and p.suffix == '.csv':

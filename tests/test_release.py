@@ -20,6 +20,9 @@ class ReleaseTests(unittest.TestCase):
             except ValueError:
                 pass
         self.assertTrue(check.allowed_source('examples/analytics/gsc_pages-current.csv'))
+        self.assertTrue(check.allowed_source('.github/ISSUE_TEMPLATE/bug.yml'))
+        self.assertTrue(check.allowed_source('.github/PULL_REQUEST_TEMPLATE.md'))
+        self.assertFalse(check.allowed_source('.github/ISSUE_TEMPLATE/private.yml'))
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root/'README.md').write_text('ghp_'+'x'*36)
@@ -35,6 +38,8 @@ class ReleaseTests(unittest.TestCase):
         files = check.source_map(ROOT)
         self.assertIn('tools/release_check.py',files)
         self.assertIn('docs/release-checklist.md',files)
+        self.assertIn('docs/quickstart.md',files)
+        self.assertIn('.github/ISSUE_TEMPLATE/bug.yml',files)
         self.assertEqual(__version__,VERSION)
         import tomllib
         self.assertEqual(__version__,tomllib.loads(files['pyproject.toml'].decode())['project']['version'])

@@ -2,11 +2,28 @@
 
 **Discover. Optimize. Verify.**
 
-An evidence-based SEO regression gate for developers, web maintainers and AI coding agents. Independent local release candidate (0.6.0rc1; not publicly released), built using Python's standard library. Static checks remain offline; the optional discovery command performs bounded public HTTPS GET requests against an operator-declared origin. No accounts, API keys, telemetry or runtime dependencies for the CLI and limited MCP server. No deployment, advertising API or website editing.
+An evidence-based SEO regression gate for developers, web maintainers and AI coding agents. Public release candidate [v0.6.0rc1](https://github.com/autominhlinh/web-growth-guard/releases/tag/v0.6.0rc1), built using Python's standard library. Static checks remain offline; the optional discovery command performs bounded public HTTPS GET requests against an operator-declared origin. No accounts, API keys, telemetry or runtime dependencies for the CLI and limited MCP server. No deployment, advertising API or website editing.
 
-## Release candidate
+[MIT license](LICENSE) | [![Linux CI](https://github.com/autominhlinh/web-growth-guard/actions/workflows/tests.yml/badge.svg)](https://github.com/autominhlinh/web-growth-guard/actions/workflows/tests.yml)
 
-Run `python examples/demo_regression.py` for the core regression demonstration. The [release checklist](docs/release-checklist.md) describes the wheel/source checks and separate official SDK and public HTTPS smoke tests. A local candidate does not imply that external tests or a public release have passed.
+[Quickstart](docs/quickstart.md) | [Hướng dẫn tiếng Việt](docs/quickstart-vi.md) | [Try the prerelease](https://github.com/autominhlinh/web-growth-guard/releases/tag/v0.6.0rc1) | [Feedback](https://github.com/autominhlinh/web-growth-guard/issues/1)
+
+## See the regression in two minutes
+
+A synthetic baseline has two indexable language pages. A candidate edit introduces `noindex` and an incorrect canonical. The gate reads actual candidate HTML, compares it against the reviewed baseline, and returns `BLOCK` with named findings. No model call, Google account, or real website is needed.
+
+```text
+Baseline: no findings in two synthetic pages
+Candidate: BLOCK
+CANONICAL_MISMATCH https://example.invalid/vi/
+NOINDEX https://example.invalid/vi/
+```
+
+[Run the demo](docs/quickstart.md), then try the offline portfolio, marketing, intelligence and analytics dashboards. `CLEAR` means only that the declared checks found no blocking issue; it is not a ranking, security or deployment guarantee.
+
+## Verified release evidence
+
+The public prerelease targets `51d2101b0f30c0ac36339fe4e899f03912444fc4` (2026-11-25). [Tests and SDK CI](https://github.com/autominhlinh/web-growth-guard/actions/runs/45538595499): 88 tests passed on each Linux/Python 3.11 and 3.13 environment; official MCP Python SDK 1.30.0 exercised nine tools and the CLEAR-to-BLOCK regression. [Public HTTPS smoke](https://github.com/autominhlinh/web-growth-guard/actions/runs/45550313355): one real HTML page at example.com, HTTP 200, robots.txt 404, no redirect. These are scoped verification results for the tagged code, not adoption statistics, production-site audits, or host-specific model tests. See [release checklist](docs/release-checklist.md).
 
 ## Why
 
@@ -14,7 +31,7 @@ A redesign or AI-assisted code update can accidentally add `noindex`, point a ca
 
 ## Quickstart
 
-Requires Python 3.11+ on Linux or another POSIX filesystem with directory descriptor and no-follow support. Linux is tested locally for this preview; other OSes have not been verified.
+Requires Python 3.11+ on Linux or another POSIX filesystem with directory descriptor and no-follow support. Linux has been tested locally and in CI. Native Windows and macOS are not yet verified; Windows users can try a Linux/WSL filesystem, but WSL is not independently tested.
 
 ```sh
 python3 -m venv .venv
@@ -58,7 +75,7 @@ web-growth-guard live-gate --policy reviewed-policy.json --baseline approved-liv
 
 `discover` reports HTTP status, redirects, declared-page content SHA-256, robots access for Googlebot, OAI-SearchBot and GPTBot, X-Robots-Tag directives, HTML/sitemap findings and JSON-LD syntax. It does not impersonate a search crawler. The independent WebGrowthGuard user agent respects its own robots rules. GPTBot's policy is informational: it does not block a search check by itself. The collector requests only declared pages, robots.txt and a declared sitemap, plus bounded same-origin redirects. No automatic link following or sitemap index expansion. Non-200 pages, unsupported encodings, redirects, unavailable robots policy and incomplete coverage fail closed. 404/410 robots is treated as absent. The robots evaluator uses exact product-token groups, wildcard fallback, merged groups, longest-rule selection and allow ties; unsupported rules may make the check unknown. These are bounded approximations of the Robots Exclusion Protocol, not a guarantee of the behavior of any crawler.
 
-Live reports have a separate versioned format and cannot be compared against static reports. Reports include observation time and collection mode (public HTTPS or injected test transport); live-gate rejects synthetic baselines. These fields describe the execution path, not a tamper-proof attestation. `live-gate` collects actual responses; `live-compare` only compares saved, trusted reports. The operator reviews the policy and baseline. A `CLEAR` result is not proof of indexing or permission to deploy. Public external DNS was unavailable during local validation; tests cover synthetic responses and real loopback TLS with a temporary test certificate. No production website was audited. See SECURITY.md.
+Live reports have a separate versioned format and cannot be compared against static reports. Reports include observation time and collection mode (public HTTPS or injected test transport); live-gate rejects synthetic baselines. These fields describe the execution path, not a tamper-proof attestation. `live-gate` collects actual responses; `live-compare` only compares saved, trusted reports. The operator reviews the policy and baseline. A `CLEAR` result is not proof of indexing or permission to deploy. Local tests cover synthetic responses and real loopback TLS with a temporary test certificate. The tagged candidate also passed the separate [public HTTPS smoke](https://github.com/autominhlinh/web-growth-guard/actions/runs/45550313355) against example.com. No production website was audited. See SECURITY.md.
 
 ## Portfolio dashboard (offline)
 
@@ -139,7 +156,7 @@ The last command is intended to be launched by an MCP host, not used interactive
 {"mcpServers":{"web-growth-guard":{"command":"/absolute/venv/bin/web-growth-guard-mcp","args":["--root","/absolute/snapshot","--policy","/absolute/reviewed-policy.json","--baseline","/absolute/approved-growth.json"]}}}
 ```
 
-Use dedicated shareable snapshots, never a live application root. Host access to its own OS/tools is outside this server's control. The server returns structured JSON plus JSON text, rejects out-of-scope arguments and does not log page contents. This is a small compatibility adapter, not an official SDK or complete MCP implementation. Real subprocess JSON-RPC tests verify discovery and calls; optional `examples/sdk_smoke.py` checks the official v1 SDK when it is separately installed (`python -m pip install 'mcp>=1.28,<2'`). The SDK was unavailable in the local environment. No actual Codex, Claude Code, Hermes or newer stateless-host integration has been verified. [MCP specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle).
+Use dedicated shareable snapshots, never a live application root. Host access to its own OS/tools is outside this server's control. The server returns structured JSON plus JSON text, rejects out-of-scope arguments and does not log page contents. This is a small compatibility adapter, not an official SDK or complete MCP implementation. Real subprocess JSON-RPC tests verify discovery and calls; optional `examples/sdk_smoke.py` checks the official v1 SDK when it is separately installed (`python -m pip install 'mcp>=1.28,<2'`). The tagged candidate passed the official Python SDK 1.30.0 test in [CI](https://github.com/autominhlinh/web-growth-guard/actions/runs/45538595499). No actual Codex, Claude Code, Hermes or newer stateless-host integration has been verified. [MCP specification](https://modelcontextprotocol.io/specification/2025-11-25/basic/lifecycle).
 
 ## Tests
 
@@ -148,7 +165,7 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 PYTHONPATH=src python examples/demo_regression.py
 ```
 
-The GitHub Actions workflow is included as a template; it has not yet run in a GitHub repository. Read SECURITY.md for limits. The local suite includes real JSON-RPC stdio subprocess tests, synthetic HTTP/TLS tests and marketing regression fixtures. The optional official SDK test is a separate CI job; GitHub Actions, public external HTTPS and specific host interoperability remain unverified.
+Read SECURITY.md for limits. The suite includes real JSON-RPC stdio subprocess tests, synthetic HTTP/TLS tests and marketing regression fixtures. The tagged candidate passed the [Linux and SDK jobs](https://github.com/autominhlinh/web-growth-guard/actions/runs/45538595499) and the [manual HTTPS job](https://github.com/autominhlinh/web-growth-guard/actions/runs/45550313355). Host-specific interoperability remains unverified. For contributions, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

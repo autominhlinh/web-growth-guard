@@ -1,0 +1,28 @@
+name: MCP or platform compatibility
+description: Share an actual platform or MCP interoperability observation
+title: "[Compatibility] "
+body:
+  - type: input
+    id: versions
+    attributes:
+      label: Version, OS, Python and host or SDK version
+    validations:
+      required: true
+  - type: dropdown
+    id: level
+    attributes:
+      label: Verification level
+      options:
+        - Installation only
+        - MCP handshake or tool discovery
+        - Actual tool calls with synthetic data
+        - Model-driven usage
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction and observed result
+      description: Do not include real data, credentials, private config or full host logs.
+    validations:
+      required: true

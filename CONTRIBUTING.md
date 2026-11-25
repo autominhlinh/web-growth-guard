@@ -10,4 +10,4 @@ limits and regression tests aligned. State what ran, what failed and what was
 not verified. Do not claim ranking or growth from synthetic examples. The optional
 SDK job and public HTTPS smoke are separate evidence levels. Keep the explicit
 `release-files.txt` source allowlist current when adding distributable files.
-For security findings, follow SECURITY.md and request a private reporting channel.
+For reproducible installation feedback, see [issue #1](https://github.com/autominhlinh/web-growth-guard/issues/1). Use the bug or compatibility template when opening a distinct issue. For security findings, follow SECURITY.md and use private reporting.

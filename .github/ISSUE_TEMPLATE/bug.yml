@@ -1,0 +1,27 @@
+name: Bug report
+description: Report a reproducible problem using synthetic inputs
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: Never include real website reports, analytics, credentials, personal data or security vulnerability details. Use SECURITY.md for vulnerabilities.
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit, OS and Python version
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Minimal synthetic reproduction
+      description: Commands and synthetic fixture only.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and actual result
+      description: Sanitized output, no private paths or data.
+    validations:
+      required: true

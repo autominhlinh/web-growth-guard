@@ -1,3 +1,6 @@
+.github/ISSUE_TEMPLATE/bug.yml
+.github/ISSUE_TEMPLATE/compatibility.yml
+.github/PULL_REQUEST_TEMPLATE.md
 .github/workflows/public-https-smoke.yml
 .github/workflows/tests.yml
 .gitignore
@@ -8,6 +11,9 @@ MANIFEST.in
 README.md
 SECURITY.md
 docs/analytics.md
+docs/community.md
+docs/quickstart-vi.md
+docs/quickstart.md
 docs/release-checklist.md
 examples/analytics/analytics.json
 examples/analytics/ga4_landings-current.csv
